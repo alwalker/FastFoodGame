@@ -23,5 +23,12 @@ namespace FastFoodGame.Presentation
         {
             InitializeComponent();
         }
+
+        private void btnConfigureDifficulties_Click(object sender, RoutedEventArgs e)
+        {
+            var difficultyManagement = new DifficultyManagement();
+            difficultyManagement.Owner = this;
+            difficultyManagement.ShowDialog();
+        }
     }
 }

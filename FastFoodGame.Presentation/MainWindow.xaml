@@ -1,8 +1,15 @@
 ﻿<Window x:Class="FastFoodGame.Presentation.MainWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        Title="MainWindow" Height="350" Width="525">
+        Title="MainWindow" Height="900" Width="1600" WindowStartupLocation="CenterScreen">
     <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="auto" />
+            <ColumnDefinition Width="auto" />
+        </Grid.ColumnDefinitions>
         
+        <StackPanel Name="stpMenu" Grid.Column="0" HorizontalAlignment="Left" VerticalAlignment="Stretch">
+            <Button Name="btnConfigureDifficulties" Content="Edit Difficulties" FontSize="14" Width="100" Height="auto" Margin="5" Click="btnConfigureDifficulties_Click"/>
+        </StackPanel>
     </Grid>
 </Window>

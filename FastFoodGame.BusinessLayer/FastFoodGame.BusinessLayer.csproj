@@ -40,7 +40,18 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="DifficultyController.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\FastFoodGame.DataAccessLayer\FastFoodGame.DataAccessLayer.csproj">
+      <Project>{deab1121-e413-4b6c-80f9-d529f07c922d}</Project>
+      <Name>FastFoodGame.DataAccessLayer</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\FastFoodGame.Framework\FastFoodGame.Framework.csproj">
+      <Project>{38C95576-3D70-4577-AC45-89578AA2CA92}</Project>
+      <Name>FastFoodGame.Framework</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
