@@ -14,6 +14,7 @@ using System.Xml;
 using FastFoodGame.BusinessLayer;
 using FastFoodGame.Framework;
 using System.Runtime.InteropServices;
+using System.Collections;
 
 namespace FastFoodGame.Presentation
 {
@@ -22,6 +23,8 @@ namespace FastFoodGame.Presentation
     /// </summary>
     public partial class DifficultyManagement : Window
     {
+        private List<Difficulty> _difficulties;
+
         public DifficultyManagement()
         {
             InitializeComponent();
@@ -71,6 +74,39 @@ namespace FastFoodGame.Presentation
             catch (Exception ex)
             {
                 MessageBox.Show("Error adding difficulty: " + ex.Message);
+            }
+        }
+
+        private void Window_Loaded_1(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                _difficulties = DifficultyController.GetAllDifficulties();
+                cboDifficulties.ItemsSource = _difficulties;
+
+                if (_difficulties.Count >= 1)
+                {
+                    cboDifficulties.SelectedIndex = 0;
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error getting difficulties: " + ex.Message);
+            }
+        }
+
+        private void cboDifficulties_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            if (cboDifficulties.SelectedIndex >= 0)
+            {
+                Difficulty dif;
+                if((dif = cboDifficulties.SelectedItem as Difficulty) != null)
+                {
+                    txtMaxPerSandwich.Text = dif.MaxNumberOfSandwiches.ToString();
+                    txtMinPerSandwich.Text = dif.MinNumberOfSandwiches.ToString();
+                    txtMaxTimePerOrder.Text = dif.MaxTimeBetweenOrders.ToString();
+                    txtMinTimePerOrder.Text = dif.MinTimeBetweenOrders.ToString();
+                }
             }
         }
     }
