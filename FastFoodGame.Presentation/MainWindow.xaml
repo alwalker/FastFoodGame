@@ -10,6 +10,7 @@
         
         <StackPanel Name="stpMenu" Grid.Column="0" HorizontalAlignment="Left" VerticalAlignment="Stretch">
             <Button Name="btnConfigureDifficulties" Content="Edit Difficulties" FontSize="14" Width="100" Height="auto" Margin="5" Click="btnConfigureDifficulties_Click"/>
+            <Button Name="btnManageUsers" Content="Edit Users" FontSize="14" Width="100" Height="auto" Margin="5" Click="btnManageUsers_Click"/>
         </StackPanel>
     </Grid>
 </Window>

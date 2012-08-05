@@ -30,5 +30,12 @@ namespace FastFoodGame.Presentation
             difficultyManagement.Owner = this;
             difficultyManagement.ShowDialog();
         }
+
+        private void btnManageUsers_Click(object sender, RoutedEventArgs e)
+        {
+            var userManagement = new UserManagement();
+            userManagement.Owner = this;
+            userManagement.ShowDialog();
+        }
     }
 }

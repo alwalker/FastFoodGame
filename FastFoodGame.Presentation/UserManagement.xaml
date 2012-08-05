@@ -1,0 +1,19 @@
+﻿<Window x:Class="FastFoodGame.Presentation.UserManagement"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="UserManagement" Height="100" Width="300" WindowStartupLocation="CenterOwner" Loaded="UserManagement_Loaded">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="auto" />
+            <RowDefinition Height="auto" />
+        </Grid.RowDefinitions>
+
+        <ComboBox Name="cboUsers" Grid.ColumnSpan="2" Margin="5" Width="100" IsEditable="True" SelectionChanged="cboUsers_SelectionChanged" />
+        
+        <StackPanel Name="stpButtons" Grid.Row="5" Grid.ColumnSpan="2" Width="auto" Height="auto" Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Bottom">
+            <Button Name="btnNew" Content="New" Margin="0,0,5,5" Width="40" Height="auto" Click="btnNew_Click"/>
+            <Button Name="btnSave" Content="Save" Margin="0,0,5,5" Width="40" Height="auto" Click="btnSave_Click"/>
+            <Button Name="btnClose" Content="Close" Margin="0,0,5,5" Width="40" Height="auto" Click="btnClose_Click"/>
+        </StackPanel>
+    </Grid>
+</Window>
