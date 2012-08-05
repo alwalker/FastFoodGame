@@ -13,5 +13,14 @@ namespace FastFoodGame.Framework
         public string Name { get; set; }
 
         #endregion
+
+        #region Methods
+
+        public override string ToString()
+        {
+            return Name;
+        }
+        
+        #endregion
     }
 }

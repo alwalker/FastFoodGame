@@ -29,6 +29,38 @@ namespace FastFoodGame.DataAccessLayer
             }
         }
 
+        public static List<User> GetAllUsers()
+        {
+            using (var conn = new SqlConnection(ConfigurationManager.ConnectionStrings["DB"].ConnectionString))
+            {
+                using (var cmd = new SqlCommand("usp_GetAllUsers", conn))
+                {
+                    cmd.CommandType = CommandType.StoredProcedure;
+                    conn.Open();
+
+                    using (var reader = cmd.ExecuteReader())
+                    {
+                        if (!reader.HasRows)
+                        {
+                            return null;
+                        }
+
+                        var users = new List<User>();
+                        while (reader.Read())
+                        {
+                            users.Add(new User
+                            {
+                                Id = Convert.ToInt32(reader["Id"].ToString()),
+                                Name = reader["Name"].ToString()
+                            });
+                        }
+
+                        return users;
+                    }
+                }
+            }
+        }
+
         #endregion
     }
 }

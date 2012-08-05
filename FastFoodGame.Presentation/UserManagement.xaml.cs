@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Windows;
@@ -20,6 +21,8 @@ namespace FastFoodGame.Presentation
     /// </summary>
     public partial class UserManagement : Window
     {
+        private ObservableCollection<User> _users;
+
         public UserManagement()
         {
             InitializeComponent();
@@ -31,6 +34,9 @@ namespace FastFoodGame.Presentation
 
         private void btnNew_Click(object sender, RoutedEventArgs e)
         {
+            cboUsers.SelectedIndex = -1;
+            cboUsers.Text = string.Empty;
+            cboUsers.Focus();
         }
 
         private void btnClose_Click(object sender, RoutedEventArgs e)
@@ -54,6 +60,20 @@ namespace FastFoodGame.Presentation
         private void UserManagement_Loaded(object sender, RoutedEventArgs e)
         {
             cboUsers.Focus();
+
+            try
+            {
+                _users = new ObservableCollection<User>(UserController.GetAllUsers());
+                if (_users != null && _users.Count > 0)
+                {
+                    cboUsers.ItemsSource = _users;
+                    cboUsers.SelectedIndex = 0;
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error getting users: " + ex.Message);
+            }
         }
     }
 }
