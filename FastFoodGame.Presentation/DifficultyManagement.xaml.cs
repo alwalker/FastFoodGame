@@ -58,26 +58,41 @@ namespace FastFoodGame.Presentation
                 return;
             }
 
-            try
+            var diff = new Difficulty
             {
-                DifficultyController.AddDifficulty(
-                    new Difficulty
-                    {
-                        Name = cboDifficulties.Text,
-                        MaxNumberOfSandwiches = maxSandwich,
-                        MinNumberOfSandwiches = minSandwich,
-                        MaxTimeBetweenOrders = maxTime,
-                        MinTimeBetweenOrders = minTime
-                    }
-                );
+                Name = cboDifficulties.Text,
+                MaxNumberOfSandwiches = maxSandwich,
+                MinNumberOfSandwiches = minSandwich,
+                MaxTimeBetweenOrders = maxTime,
+                MinTimeBetweenOrders = minTime
+            };
+
+            if (cboDifficulties.SelectedIndex >= 0)
+            {
+                try
+                {
+                    diff.Id = (cboDifficulties.SelectedItem as Difficulty).Id;
+                    DifficultyController.EditDifficulty(diff);
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show("Error modifying difficulty: " + ex.Message);
+                }
             }
-            catch (Exception ex)
+            else
             {
-                MessageBox.Show("Error adding difficulty: " + ex.Message);
+                try
+                {
+                    DifficultyController.AddDifficulty(diff);
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show("Error adding difficulty: " + ex.Message);
+                }
             }
         }
 
-        private void Window_Loaded_1(object sender, RoutedEventArgs e)
+        private void Window_Loaded(object sender, RoutedEventArgs e)
         {
             try
             {
@@ -100,7 +115,7 @@ namespace FastFoodGame.Presentation
             if (cboDifficulties.SelectedIndex >= 0)
             {
                 Difficulty dif;
-                if((dif = cboDifficulties.SelectedItem as Difficulty) != null)
+                if ((dif = cboDifficulties.SelectedItem as Difficulty) != null)
                 {
                     txtMaxPerSandwich.Text = dif.MaxNumberOfSandwiches.ToString();
                     txtMinPerSandwich.Text = dif.MinNumberOfSandwiches.ToString();
@@ -108,6 +123,22 @@ namespace FastFoodGame.Presentation
                     txtMinTimePerOrder.Text = dif.MinTimeBetweenOrders.ToString();
                 }
             }
+        }
+
+        private void btnNew_Click(object sender, RoutedEventArgs e)
+        {
+            cboDifficulties.SelectedIndex = -1;
+            txtMaxPerSandwich.Text = string.Empty;
+            txtMaxTimePerOrder.Text = string.Empty;
+            txtMinPerSandwich.Text = string.Empty;
+            txtMinTimePerOrder.Text = string.Empty;
+            cboDifficulties.Text = string.Empty;
+            cboDifficulties.Focus();
+        }
+
+        private void btnClose_Click(object sender, RoutedEventArgs e)
+        {
+            this.Close();
         }
     }
 }

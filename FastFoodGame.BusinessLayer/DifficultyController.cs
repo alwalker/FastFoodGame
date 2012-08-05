@@ -16,6 +16,11 @@ namespace FastFoodGame.BusinessLayer
             DifficultyDAL.AddDiffuculty(difficulty);
         }
 
+        public static void EditDifficulty(Difficulty difficulty)
+        {
+            DifficultyDAL.EditDiffuculty(difficulty);
+        }
+
         public static List<Difficulty> GetAllDifficulties()
         {
             return DifficultyDAL.GetAllDifficulties();
