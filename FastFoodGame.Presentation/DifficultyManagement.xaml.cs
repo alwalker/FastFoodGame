@@ -15,6 +15,7 @@ using FastFoodGame.BusinessLayer;
 using FastFoodGame.Framework;
 using System.Runtime.InteropServices;
 using System.Collections;
+using System.Collections.ObjectModel;
 
 namespace FastFoodGame.Presentation
 {
@@ -23,7 +24,7 @@ namespace FastFoodGame.Presentation
     /// </summary>
     public partial class DifficultyManagement : Window
     {
-        private List<Difficulty> _difficulties;
+        private ObservableCollection<Difficulty> _difficulties;
 
         public DifficultyManagement()
         {
@@ -84,6 +85,8 @@ namespace FastFoodGame.Presentation
                 try
                 {
                     DifficultyController.AddDifficulty(diff);
+                    _difficulties.Add(diff);
+                    MessageBox.Show("Added difficulty!");
                 }
                 catch (Exception ex)
                 {
@@ -96,7 +99,7 @@ namespace FastFoodGame.Presentation
         {
             try
             {
-                _difficulties = DifficultyController.GetAllDifficulties();
+                _difficulties = new ObservableCollection<Difficulty>(DifficultyController.GetAllDifficulties());
                 cboDifficulties.ItemsSource = _difficulties;
 
                 if (_difficulties.Count >= 1)
