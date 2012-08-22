@@ -99,11 +99,12 @@ namespace FastFoodGame.Presentation
         {
             try
             {
-                _difficulties = new ObservableCollection<Difficulty>(DifficultyController.GetAllDifficulties());
-                cboDifficulties.ItemsSource = _difficulties;
+                var difficulties = DifficultyController.GetAllDifficulties();
+                
 
-                if (_difficulties.Count >= 1)
+                if (difficulties != null && difficulties.Count > 0)
                 {
+                    cboDifficulties.ItemsSource = _difficulties = new ObservableCollection<Difficulty>(difficulties);
                     cboDifficulties.SelectedIndex = 0;
                 }
             }

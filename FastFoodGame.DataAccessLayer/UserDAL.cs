@@ -29,6 +29,24 @@ namespace FastFoodGame.DataAccessLayer
             }
         }
 
+        public static void EditUser(User user)
+        {
+            using (var conn = new SqlConnection(ConfigurationManager.ConnectionStrings["DB"].ConnectionString))
+            {
+                using (var cmd = new SqlCommand("usp_EditUser", conn))
+                {
+                    cmd.Parameters.Add(new SqlParameter("@Id", SqlDbType.Int));
+                    cmd.Parameters["@Id"].Value = user.Id;
+                    cmd.Parameters.Add(new SqlParameter("@Name", SqlDbType.VarChar, 100));
+                    cmd.Parameters["@Name"].Value = user.Name;
+                    cmd.CommandType = CommandType.StoredProcedure;
+
+                    conn.Open();
+                    cmd.ExecuteNonQuery();
+                }
+            }
+        }
+
         public static List<User> GetAllUsers()
         {
             using (var conn = new SqlConnection(ConfigurationManager.ConnectionStrings["DB"].ConnectionString))

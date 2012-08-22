@@ -13,6 +13,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using FastFoodGame.BusinessLayer;
 using FastFoodGame.Framework;
+using System.Collections;
 
 namespace FastFoodGame.Presentation
 {
@@ -28,28 +29,17 @@ namespace FastFoodGame.Presentation
             InitializeComponent();
         }
 
-        private void cboUsers_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        {
-        }
-
         private void btnNew_Click(object sender, RoutedEventArgs e)
-        {
-            cboUsers.SelectedIndex = -1;
-            cboUsers.Text = string.Empty;
-            cboUsers.Focus();
-        }
-
-        private void btnClose_Click(object sender, RoutedEventArgs e)
-        {
-            this.Close();
-        }
-
-        private void btnSave_Click(object sender, RoutedEventArgs e)
         {
             try
             {
-                UserController.AddUser(new User { Name = cboUsers.Text });
-                MessageBox.Show("Added user!");
+                var input = new InputWindow("Name");
+                input.Owner = this;
+
+                if (input.ShowDialog().Value)
+                {
+                    UserController.AddUser(new User { Name = input.Value });
+                }
             }
             catch (Exception ex)
             {
@@ -57,17 +47,48 @@ namespace FastFoodGame.Presentation
             }
         }
 
+        private void btnClose_Click(object sender, RoutedEventArgs e)
+        {
+            this.Close();
+        }
+
+        private void btnEdit_Click(object sender, RoutedEventArgs e)
+        {
+            if (lstUsers.SelectedIndex >= 0)
+            {
+                try
+                {
+                    var input = new InputWindow("Name");
+                    input.Owner = this;
+
+                    if (input.ShowDialog().Value)
+                    {
+                        var user = new User 
+                        {
+                            Name = input.Value,
+                            Id = ((User)lstUsers.SelectedItem).Id
+                        };
+
+                        UserController.EditUser(user);
+                        ((User)lstUsers.SelectedItem).Name = input.Value;
+                    }
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show("Error adding new user: " + ex.Message);
+                }
+            }
+        }
+
         private void UserManagement_Loaded(object sender, RoutedEventArgs e)
         {
-            cboUsers.Focus();
-
             try
             {
-                _users = new ObservableCollection<User>(UserController.GetAllUsers());
-                if (_users != null && _users.Count > 0)
+                var users = UserController.GetAllUsers();
+
+                if (users != null && users.Count > 0)
                 {
-                    cboUsers.ItemsSource = _users;
-                    cboUsers.SelectedIndex = 0;
+                    lstUsers.ItemsSource = _users = new ObservableCollection<User>(users);
                 }
             }
             catch (Exception ex)

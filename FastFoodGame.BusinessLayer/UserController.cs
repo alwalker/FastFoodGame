@@ -21,6 +21,11 @@ namespace FastFoodGame.BusinessLayer
             return UserDAL.GetAllUsers();
         }
 
+        public static void EditUser(User user)
+        {
+            UserDAL.EditUser(user);
+        }
+
         #endregion
     }
 }
