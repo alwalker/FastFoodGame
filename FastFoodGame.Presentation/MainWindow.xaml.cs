@@ -37,5 +37,12 @@ namespace FastFoodGame.Presentation
             userManagement.Owner = this;
             userManagement.ShowDialog();
         }
+
+        private void btnManageIngredients_Click(object sender, RoutedEventArgs e)
+        {
+            var ingredientManagement = new IngredientManagement();
+            ingredientManagement.Owner = this;
+            ingredientManagement.ShowDialog();
+        }
     }
 }

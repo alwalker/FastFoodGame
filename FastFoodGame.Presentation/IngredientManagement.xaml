@@ -1,0 +1,35 @@
+﻿<Window x:Class="FastFoodGame.Presentation.IngredientManagement"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="IngredientManagement" Height="300" Width="300" WindowStartupLocation="CenterOwner" SizeToContent="WidthAndHeight" Loaded="Window_Loaded">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="auto" />
+            <RowDefinition Height="auto" />
+            <RowDefinition Height="auto" />
+            <RowDefinition Height="auto" />
+            <RowDefinition Height="auto" />
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*" />
+            <ColumnDefinition Width="*" />
+        </Grid.ColumnDefinitions>
+
+        <ComboBox Name="cboIngredients" Grid.ColumnSpan="2" Margin="5" Width="100" IsEditable="True" SelectionChanged="cboIngredients_SelectionChanged" />
+        <TextBlock Grid.Row="1" Text="Single Container Capacity: " TextWrapping="Wrap" VerticalAlignment="Center" Margin="5,0,0,0" Width="auto" Height="auto"/>
+        <TextBox Name="txtSingleContainerCapacity" Grid.Column="1" Grid.Row="1" HorizontalAlignment="Right" VerticalAlignment="Center" Width="50" Height="auto" Margin="5"/>
+        <TextBlock Grid.Row="2" Text="Life Span: " TextWrapping="Wrap" VerticalAlignment="Center" Margin="5,0,0,0" Width="auto" Height="auto"/>
+        <TextBox Name="txtLifeSpan" Grid.Column="1" Grid.Row="2" HorizontalAlignment="Right" VerticalAlignment="Center" Width="50" Height="auto" Margin="5"/>
+        <TextBlock Grid.Row="3" Text="Container Refil Time: " TextWrapping="Wrap" VerticalAlignment="Center" Margin="5,0,0,0" Width="auto" Height="auto"/>
+        <TextBox Name="txtContainerRefilTime" Grid.Column="1" Grid.Row="3" HorizontalAlignment="Right" VerticalAlignment="Center" Width="50" Height="auto" Margin="5" />
+        <TextBlock Grid.Row="4" Text="Type: " TextWrapping="Wrap" VerticalAlignment="Center" Margin="5,0,0,0" Width="auto" Height="auto"/>
+        <ComboBox Name="cboType" Grid.Column="1" Grid.Row="4" HorizontalAlignment="Right" VerticalAlignment="Center" Width="auto" Height="auto" Margin="5"/>
+
+        <StackPanel Name="stpButtons" Grid.Row="5" Grid.ColumnSpan="2" Width="auto" Height="auto" Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Bottom">
+            <Button Name="btnNew" Content="New" Margin="0,0,5,5" Width="40" Height="auto" Click="btnNew_Click"/>
+            <Button Name="btnSave" Content="Save" Margin="0,0,5,5" Width="40" Height="auto" Click="btnSave_Click"/>
+            <Button Name="btnClose" Content="Close" Margin="0,0,5,5" Width="40" Height="auto" Click="btnClose_Click"/>
+        </StackPanel>
+    </Grid>
+</Window>
